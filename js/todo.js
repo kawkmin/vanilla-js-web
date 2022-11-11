@@ -1,6 +1,6 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoList = document.getElementById("todo-list");
-const toDoInput = toDoForm.querySelector("input");
+const toDoInput = toDoForm.querySelector("#todo-form input");
 
 const TODOS_KEY = "todos";
 
@@ -43,11 +43,14 @@ function handleToDoSubmit(event) {
         text: newTodo,
         id: Date.now(),
     };
-    toDos.push(newTodoObj);
-    paintToDo(newTodoObj);
-    saveToDos();
+    if (toDos.length <= 10) {
+        toDos.push(newTodoObj);
+        paintToDo(newTodoObj);
+        saveToDos();
+    } else {
+        alert("To DO는 10개까지만 입력이 가능합니다");
+    }
 }
-
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
